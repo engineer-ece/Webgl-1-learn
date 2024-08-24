@@ -152,10 +152,21 @@
             image.onload = function() {
                 loadTexture(gl, n, texture, u_Sampler, image);
             };
-            image.src = 'https://threejs.org/manual/examples/resources/images/checker.png'; // Use a different image URL if needed
+
+            var url = 'https://engineer-ece.github.io/Webgl-1-learn/leaves.jpg';
+            requestCORSIfNotSameOrigin(image, url);
+
+          
+            image.src = url;  // Use a different image URL if needed
 
             return true;
         }
+
+        function requestCORSIfNotSameOrigin(img, url) {
+  if ((new URL(url, window.location.href)).origin !== window.location.origin) {
+    img.crossOrigin = "";
+  }
+}
 
         function loadTexture(gl, n, texture, u_Sampler, image) {
             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
